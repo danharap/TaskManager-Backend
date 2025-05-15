@@ -173,4 +173,5 @@ C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\bin\Debug\net8.
 C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\obj\Debug\net8.0\BackendW2Proj.sourcelink.json
 C:\Users\DanielHarapiak\source\repos\BackendW2Proj\BackendW2Proj\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

@@ -113,10 +113,14 @@ namespace FullstackApp.Controllers
                 }
             }
 
+            // Remove all subtasks related to this task (optional, for clarity)
+            var subtasks = _context.SubTasks.Where(st => st.taskId == id).ToList();
+            _context.SubTasks.RemoveRange(subtasks);
+
             _context.Tasks.Remove(task);
             _context.SaveChanges();
 
-            return Ok(new { Message = $"Task with ID {id} has been removed." });
+            return Ok(new { Message = $"Task with ID {id} and its subtasks have been removed." });
         }
 
 
@@ -126,6 +130,89 @@ namespace FullstackApp.Controllers
             var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "id");
             return userIdClaim != null ? int.Parse(userIdClaim.Value) : 0;
         }
+
+        [HttpGet("{taskId}/subtasks")]
+        public IActionResult GetSubTasksForTask(int taskId)
+        {
+            var userId = GetUserId();
+            // Ensure the user owns the task (or is admin, if you want to allow that)
+            var task = _context.Tasks.FirstOrDefault(t => t.id == taskId && t.userId == userId);
+            if (task == null)
+                return NotFound(new { Message = $"Task with ID {taskId} not found." });
+
+            var subtasks = _context.SubTasks.Where(st => st.taskId == taskId).ToList();
+            return Ok(subtasks);
+        }
+
+
+
+        [HttpPost("{taskId}/subtasks")]
+        public IActionResult AddSubTask(int taskId, [FromBody] SubTaskModel subTask)
+        {
+            var userId = GetUserId();
+            var task = _context.Tasks.FirstOrDefault(t => t.id == taskId && t.userId == userId);
+            if (task == null)
+                return NotFound(new { Message = $"Task with ID {taskId} not found." });
+
+            subTask.taskId = taskId;
+            // subTask.status can be set by the client or you can set a default here
+            if (string.IsNullOrEmpty(subTask.status))
+                subTask.status = "Not Started"; // Example default
+
+            _context.SubTasks.Add(subTask);
+            _context.SaveChanges();
+
+            return Ok(subTask);
+        }
+
+
+        [HttpPut("subtasks/{subTaskId}")]
+        public IActionResult UpdateSubTask(int subTaskId, [FromBody] SubTaskModel updatedSubTask)
+        {
+            var userId = GetUserId();
+            var subTask = _context.SubTasks
+                .Join(_context.Tasks, s => s.taskId, t => t.id, (s, t) => new { s, t })
+                .Where(st => st.s.id == subTaskId && st.t.userId == userId)
+                .Select(st => st.s)
+                .FirstOrDefault();
+
+            if (subTask == null)
+                return NotFound(new { Message = $"SubTask with ID {subTaskId} not found." });
+
+            subTask.title = updatedSubTask.title;
+            subTask.description = updatedSubTask.description;
+            subTask.isCompleted = updatedSubTask.isCompleted;
+            subTask.status = updatedSubTask.status; 
+
+            _context.SaveChanges();
+            return Ok(subTask);
+        }
+
+
+
+        [HttpDelete("subtasks/{subTaskId}")]
+        public IActionResult DeleteSubTask(int subTaskId)
+        {
+            var userId = GetUserId();
+            var subTask = _context.SubTasks
+                .Join(_context.Tasks, s => s.taskId, t => t.id, (s, t) => new { s, t })
+                .Where(st => st.s.id == subTaskId && st.t.userId == userId)
+                .Select(st => st.s)
+                .FirstOrDefault();
+
+            if (subTask == null)
+                return NotFound(new { Message = $"SubTask with ID {subTaskId} not found." });
+
+            _context.SubTasks.Remove(subTask);
+            _context.SaveChanges();
+            return Ok(new { Message = $"SubTask with ID {subTaskId} has been removed." });
+        }
+
+
+
+
+
+
     }
 }
 

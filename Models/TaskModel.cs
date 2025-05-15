@@ -10,6 +10,8 @@
         public string? priority { get; set; }
         public int userId { get; set; }
         public DateTime? plannedCompletionDate { get; set; } // User's planned completion date
+        public ICollection<SubTaskModel>? SubTasks { get; set; }
+
     }
 
 

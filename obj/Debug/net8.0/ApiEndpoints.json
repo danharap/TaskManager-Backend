@@ -212,12 +212,86 @@
   },
   {
     "ContainingType": "FullstackApp.Controllers.TaskController",
+    "Method": "GetSubTasksForTask",
+    "RelativePath": "api/tasks/{taskId}/subtasks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FullstackApp.Controllers.TaskController",
+    "Method": "AddSubTask",
+    "RelativePath": "api/tasks/{taskId}/subtasks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "subTask",
+        "Type": "BackendW2Proj.Models.SubTaskModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FullstackApp.Controllers.TaskController",
     "Method": "GetAllTasks",
     "RelativePath": "api/tasks/all",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FullstackApp.Controllers.TaskController",
+    "Method": "UpdateSubTask",
+    "RelativePath": "api/tasks/subtasks/{subTaskId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subTaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedSubTask",
+        "Type": "BackendW2Proj.Models.SubTaskModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FullstackApp.Controllers.TaskController",
+    "Method": "DeleteSubTask",
+    "RelativePath": "api/tasks/subtasks/{subTaskId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "subTaskId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]
