@@ -195,21 +195,20 @@ namespace FullstackApp.Controllers
         {
             var userId = GetUserId();
             var subTask = _context.SubTasks
-                .Join(_context.Tasks, s => s.taskId, t => t.id, (s, t) => new { s, t })
-                .Where(st => st.s.id == subTaskId && st.t.userId == userId)
-                .Select(st => st.s)
-                .FirstOrDefault();
+                .FirstOrDefault(st => st.id == subTaskId);
 
             if (subTask == null)
                 return NotFound(new { Message = $"SubTask with ID {subTaskId} not found." });
+
+            // Check if the user owns the parent task
+            var task = _context.Tasks.FirstOrDefault(t => t.id == subTask.taskId && t.userId == userId);
+            if (task == null)
+                return Forbid();
 
             _context.SubTasks.Remove(subTask);
             _context.SaveChanges();
             return Ok(new { Message = $"SubTask with ID {subTaskId} has been removed." });
         }
-
-
-
 
 
 

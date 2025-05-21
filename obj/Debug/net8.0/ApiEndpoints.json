@@ -132,6 +132,84 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "BackendW2Proj.Controllers.AuthController",
+    "Method": "DeleteOwnAccount",
+    "RelativePath": "api/auth/users/me",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendW2Proj.Controllers.NotificationsController",
+    "Method": "CreateNotification",
+    "RelativePath": "api/notifications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "BackendW2Proj.Models.NotificationModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendW2Proj.Controllers.NotificationsController",
+    "Method": "GetNotifications",
+    "RelativePath": "api/notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendW2Proj.Controllers.NotificationsController",
+    "Method": "DeleteNotification",
+    "RelativePath": "api/notifications/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendW2Proj.Controllers.NotificationsController",
+    "Method": "MarkAsRead",
+    "RelativePath": "api/notifications/{id}/read",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BackendW2Proj.Controllers.NotificationsController",
+    "Method": "ClearAllNotifications",
+    "RelativePath": "api/notifications/clear-all",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FullstackApp.Controllers.TaskController",
     "Method": "GetTasks",
     "RelativePath": "api/tasks",

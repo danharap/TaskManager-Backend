@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackendW2Proj")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c00c70db559bb8c50a8a5655a2f44e6cf3f649bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36293cdf09391943507ebccff082f88035abfec1")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackendW2Proj")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackendW2Proj")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

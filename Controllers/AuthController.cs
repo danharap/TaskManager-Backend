@@ -242,5 +242,36 @@ namespace BackendW2Proj.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        [HttpDelete("users/me")]
+        [Authorize]
+        public IActionResult DeleteOwnAccount()
+        {
+            // Get the user ID from the JWT claims
+            var userId = int.Parse(User.Claims.First(c => c.Type == "id").Value);
+
+            // Find the user
+            var user = _context.Users.FirstOrDefault(u => u.id == userId);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
+
+            // Delete all tasks (and subtasks) associated with the user
+            var tasks = _context.Tasks.Where(t => t.userId == userId).ToList();
+            foreach (var task in tasks)
+            {
+                var subtasks = _context.SubTasks.Where(st => st.taskId == task.id).ToList();
+                _context.SubTasks.RemoveRange(subtasks);
+            }
+            _context.Tasks.RemoveRange(tasks);
+
+            // Delete the user
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            return Ok(new { Message = "Your account and all associated data have been deleted." });
+        }
+
     }
 }
